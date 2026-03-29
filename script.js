@@ -8,9 +8,7 @@ if (!window.mySupabase) {
     console.log('✅ Supabase 客户端已初始化');
 }
 
-// 使用 window 上的客户端
-const supabase = window.mySupabase;
-
+// 直接使用 window.mySupabase，不再用 const 重复声明变量
 const poemsContainer = document.getElementById('poems-container');
 
 async function loadPoems() {
@@ -20,7 +18,7 @@ async function loadPoems() {
     }
     poemsContainer.innerHTML = '<div class="loading">✨ 加载霓虹碎片中 ✨</div>';
 
-    const { data, error } = await supabase
+    const { data, error } = await window.mySupabase
         .from('poems')
         .select('*')
         .order('created_at', { ascending: false });
@@ -60,7 +58,7 @@ async function loadPoems() {
             const id = btn.getAttribute('data-id');
             const currentLikes = parseInt(btn.innerText.match(/\d+/)?.[0] || 0);
             const newLikes = currentLikes + 1;
-            const { error } = await supabase
+            const { error } = await window.mySupabase
                 .from('poems')
                 .update({ likes: newLikes })
                 .eq('id', id);
