@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', 'Fira Code', monospace;
+}
+
+body {
+    background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+    color: #ccf7ff;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #0ff, #f0f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.sub {
+    text-align: center;
+    color: #6ee7ff;
+    border-bottom: 1px dashed #0ff;
+    display: inline-block;
+    width: auto;
+    margin: 0 auto 1.5rem;
+    padding-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.hero {
+    text-align: center;
+    margin: 2rem 0;
+    background: rgba(0,20,40,0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 32px;
+    padding: 2rem;
+    border: 1px solid #0ff44f;
+}
+
+.download-btn {
+    display: inline-block;
+    background: #0b1a28;
+    border: 2px solid #0ff;
+    color: #0ff;
+    padding: 12px 28px;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: 0.2s;
+    box-shadow: 0 0 12px rgba(0,255,255,0.3);
+}
+
+.download-btn:hover {
+    background: #0ff22a30;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px cyan;
+}
+
+.small {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.gallery-header {
+    text-align: center;
+    margin: 3rem 0 1.5rem;
+}
+
+.gallery-header h2 {
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #fff, #9cf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.poems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.poem-card {
+    background: rgba(10,25,40,0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0,255,255,0.3);
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.poem-card:hover {
+    transform: translateY(-6px);
+    border-color: #0ff;
+    box-shadow: 0 10px 25px rgba(0,255,255,0.2);
+}
+
+.poem-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid rgba(0,255,255,0.3);
+}
+
+.card-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.poem-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #e0f0ff;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 120px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.poem-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #7ab3cc;
+    margin-top: 6px;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    color: #ff88aa;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.like-btn:hover {
+    color: #ff3366;
+}
+
+.loading, .empty {
+    text-align: center;
+    padding: 3rem;
+    color: #6f9fbf;
+    grid-column: 1 / -1;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+    font-size: 0.7rem;
+    color: #6f9fbf;
+}
