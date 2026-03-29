@@ -1,17 +1,23 @@
-// 请替换为你的 Supabase URL 和 anon key
-const SUPABASE_URL = 'https://xkkilbqgjifclowjjqkk.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_CuLtfA-erraBD9z4LkdM2g_gc0wiYni';
+// 防止重复声明：如果已经存在，就不再创建
+if (!window.mySupabase) {
+    const SUPABASE_URL = 'https://xkkilbqgjifclowjjqkk.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_CuLtfA-erraBD9z4LkdM2g_gc0wiYni';
 
-// 直接使用 window.supabase 创建客户端，但不重复声明变量
-// 如果 window.supabase 已经存在，可以直接使用；否则创建一个并挂载到 window 上
-if (!window.supabaseClient) {
-    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // 创建客户端并挂载到 window 对象上
+    window.mySupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    console.log('✅ Supabase 客户端已初始化');
 }
-const supabase = window.supabaseClient;
+
+// 使用 window 上的客户端
+const supabase = window.mySupabase;
 
 const poemsContainer = document.getElementById('poems-container');
 
 async function loadPoems() {
+    if (!poemsContainer) {
+        console.error('❌ 找不到 poems-container 元素');
+        return;
+    }
     poemsContainer.innerHTML = '<div class="loading">✨ 加载霓虹碎片中 ✨</div>';
 
     const { data, error } = await supabase
@@ -20,7 +26,7 @@ async function loadPoems() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error('加载失败:', error);
+        console.error('❌ 加载失败:', error);
         poemsContainer.innerHTML = '<div class="empty">⚠️ 加载失败，请刷新重试</div>';
         return;
     }
@@ -47,6 +53,7 @@ async function loadPoems() {
         poemsContainer.appendChild(card);
     });
 
+    // 绑定点赞事件
     document.querySelectorAll('.like-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.stopPropagation();
@@ -76,6 +83,7 @@ function escapeHtml(str) {
     });
 }
 
+// 页面加载完成后执行
 loadPoems();
 
 const downloadBtn = document.getElementById('downloadPlugin');
