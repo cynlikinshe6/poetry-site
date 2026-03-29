@@ -2,7 +2,12 @@
 const SUPABASE_URL = 'https://xkkilbqgjifclowjjqkk.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_CuLtfA-erraBD9z4LkdM2g_gc0wiYni';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 直接使用 window.supabase 创建客户端，但不重复声明变量
+// 如果 window.supabase 已经存在，可以直接使用；否则创建一个并挂载到 window 上
+if (!window.supabaseClient) {
+    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+const supabase = window.supabaseClient;
 
 const poemsContainer = document.getElementById('poems-container');
 
