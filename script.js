@@ -1,16 +1,9 @@
-// 防止重复声明
-if (typeof window._supabaseInitialized === 'undefined') {
-    window._supabaseInitialized = true;
+// 请替换为你的 Supabase URL 和 anon key
+const SUPABASE_URL = 'https://xkkilbqgjifclowjjqkk.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_CuLtfA-erraBD9z4LkdM2g_gc0wiYni';
 
-    const SUPABASE_URL = 'https://xkkilbqgjifclowjjqkk.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_CuLtfA-erraBD9z4LkdM2g_gc0wiYni';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // 挂载到 window 上，避免 const 重复
-    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
-
-// 使用全局变量
-const supabase = window.supabaseClient;
 const poemsContainer = document.getElementById('poems-container');
 
 async function loadPoems() {
