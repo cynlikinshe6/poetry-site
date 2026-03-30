@@ -91,3 +91,48 @@ if (downloadBtn) {
         alert('插件下载链接即将开放，敬请期待！');
     });
 }
+// ========== 主题切换功能 ==========
+function setTheme(themeName) {
+    // 移除所有主题class
+    document.body.classList.remove('theme-cyber', 'theme-elegant', 'theme-fun');
+    // 添加选中的主题
+    document.body.classList.add(`theme-${themeName}`);
+    // 保存到localStorage
+    localStorage.setItem('preferred-theme', themeName);
+    console.log(`🎨 主题已切换为: ${themeName}`);
+}
+
+// 初始化主题（读取保存的偏好或默认使用cyber）
+function initTheme() {
+    const savedTheme = localStorage.getItem('preferred-theme');
+    if (savedTheme && ['cyber', 'elegant', 'fun'].includes(savedTheme)) {
+        setTheme(savedTheme);
+    } else {
+        setTheme('cyber'); // 默认赛博霓虹
+    }
+}
+
+// 绑定主题切换按钮事件
+function bindThemeButtons() {
+    const themeBtns = document.querySelectorAll('.theme-btn');
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const theme = btn.getAttribute('data-theme');
+            if (theme) {
+                setTheme(theme);
+            }
+        });
+    });
+}
+
+// 页面加载完成后初始化主题
+// 注意：如果你已经有 window.onload 或 DOMContentLoaded，可以合并进去
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        bindThemeButtons();
+    });
+} else {
+    initTheme();
+    bindThemeButtons();
+}
